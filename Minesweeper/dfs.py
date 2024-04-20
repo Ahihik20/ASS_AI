@@ -3,6 +3,7 @@ import time
 import sys
 import csv
 
+# check True solution or Not 
 def goalState(board):
     for row in range(len(board)):
         for col in range(len(board[0])):
@@ -12,7 +13,7 @@ def goalState(board):
             if str(mines) != board[row][col]:
                 return False
     return True
-
+# Count Mines
 def countMines(board, row, col):
     count = 0
     for dx in [-1, 0, 1]:
@@ -22,7 +23,7 @@ def countMines(board, row, col):
             if 0<= new_row <len(board) and 0<=new_col<len(board[0]) and board[new_row][new_col] == "M":
                 count += 1
     return count
-
+# Create new board
 def createBoard(stack, board):
     for i in range(len(board)):
         for j in range(len(board[0])):
@@ -34,7 +35,7 @@ def createBoard(stack, board):
                 stack.append(new_board1)
                 stack.append(new_board2)
                 return
-
+# DFS algorithms
 def dfs(board):
     count = 0
     if goalState(board):

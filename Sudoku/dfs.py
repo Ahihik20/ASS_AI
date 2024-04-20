@@ -1,7 +1,8 @@
 import sys
 import time
 import csv
-        
+
+# DFS algorithms      
 def solve(board):
     empty = findEmpty(board)
     if not empty:
@@ -16,7 +17,7 @@ def solve(board):
                 return True
             board[row][col] = 0
     return False
-
+# Check valid box or invalid box
 def checkValid(board, num , pos):
     # Check column
     for i  in range(len(board)):
@@ -37,6 +38,7 @@ def checkValid(board, num , pos):
                  return False
              
     return True
+# Check empty box
 def findEmpty(board):
     # find empty box
     for i in range(len(board)):

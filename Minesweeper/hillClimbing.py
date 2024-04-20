@@ -5,6 +5,7 @@ import time
 import sys
 import csv
 
+# check True solution or Not 
 def goalState(board):
     for row in range(len(board)):
         for col in range(len(board[0])):
@@ -15,6 +16,7 @@ def goalState(board):
                 return False
     return True
 
+# Count Mines
 def countMines(board, row, col):
     count = 0
     for dx in [-1, 0, 1]:
@@ -25,6 +27,7 @@ def countMines(board, row, col):
                 count += 1
     return count
 
+# Evaluation Fuonction for Hill Climbing algorithms
 def evaluationFunction(board):
     error = 0
     for row in range(len(board)):
@@ -35,7 +38,7 @@ def evaluationFunction(board):
             if str(mines) != board[row][col]:
                 error += 1
     return error
-
+# Check empty box in board
 def emptyList(board):
     listEmpty = []
     for row in range(len(board)):
@@ -43,12 +46,11 @@ def emptyList(board):
             if board[row][col] == "E":
                 listEmpty.append([row,col])
     return listEmpty
-
+# Hill Climbing algorithms
 def hillClimbing(board):
     if goalState(board):
         return board
     listEmpty = emptyList(board)
-    # error = evaluationFunction(board)
     step = 0
     while not goalState(board):
         if step > 200: break

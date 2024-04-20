@@ -5,6 +5,7 @@ import random
 import sys
 import csv
 
+# Check valid box or invalid box
 def checkValid(board, num , pos):
     # Check column
     res = 0
@@ -26,6 +27,7 @@ def checkValid(board, num , pos):
                  res += 1
              
     return res
+# Check empty box
 def findEmpty(board):
     res =[]
     
@@ -37,12 +39,14 @@ def findEmpty(board):
         res.append(minires)
     return res
 
+# Find valid value for a box
 def findSol_list(bo):
     res =[]
     for i in range(len(bo)):
         res.append(findNum(bo[i]))
     
     return res
+# Evaluation Function for Hill Climbing algorithms
 def checkPoint(bo):
     res = 0
     for i in range(len(bo)):
@@ -50,7 +54,14 @@ def checkPoint(bo):
             res += checkValid(bo,bo[i][j],(i,j)) 
             
     return res
-
+# Check valid value of a box
+def findNum(col):
+    res =[]
+    for i in range (1,10):
+        if i not in col:
+            res += [i] 
+    return res
+# Hill Climbing algorithms
 def solve1(bo):
     z = 0
     prob = bo
@@ -76,13 +87,6 @@ def solve1(bo):
     if z == 201:
         return False
     else: return True
-
-def findNum(col):
-    res =[]
-    for i in range (1,10):
-        if i not in col:
-            res += [i] 
-    return res
 
 test1 = [ [0,0,3,5,1,0,6,2,8],
     [2,9,0,0,0,3,7,0,0],
