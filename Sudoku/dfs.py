@@ -197,14 +197,34 @@ test15 =  [
     [7,0,8,2,0,0,0,3,5]]
 
 test_case = [test1, test2, test3, test4, test5, test6, test7, test8, test9, test10, test11, test12, test13, test14, test15]
-for i in range(len(test_case)):
-    print("Testcase {}:".format(i+1))
-    time_start = time.time()
-    result = solve(test_case[i])
-    time_run = time.time()-time_start
-    for row in test_case[i]:
-        print(row)
-    print("Time run = ",end="")
-    print(str(time_run))
-    print("Mem memorry usage = ",end="")
-    print(sys.getsizeof(result))
+# for i in range(len(test_case)):
+#     print("Testcase {}:".format(i+1))
+#     time_start = time.time()
+#     result = solve(test_case[i])
+#     time_run = time.time()-time_start
+#     for row in test_case[i]:
+#         print(row)
+#     print("Time run = ",end="")
+#     print(str(time_run))
+#     print("Mem memorry usage = ",end="")
+#     print(sys.getsizeof(result))
+board = [ 
+    [0,6,7,9,0,8,2,1,0],
+    [0,0,0,0,5,0,0,0,0],
+    [8,5,0,1,0,6,0,3,4],
+    [0,3,8,0,0,0,4,9,0],
+    [1,0,0,0,0,0,0,0,3],
+    [0,4,6,0,0,0,5,2,0],
+    [6,2,0,7,0,3,0,4,9],
+    [0,0,0,0,8,0,0,0,0],
+    [0,8,1,4,0,9,3,5,0]]
+time_start = time.time()
+result = solve(board)
+time_run = time.time()-time_start
+for row in board:
+    print(row)
+print("Time run = ",end="")
+print(str(time_run))
+print("Mem memorry usage = ",end="")
+print(sys.getsizeof(result))
+    

@@ -73,8 +73,8 @@ def hillClimbing(board):
         step += 1   
     return []
 
-board = [["2","E","E","1","E"],["E","2","3","E","E"],["2","E","E","E","2"],["E","2","2","E","E"],["E","2","E","1","E"]]
-#board = [["E","E","3","E","3"],["2","E","E","E","E"],["E","2","2","2","E"],["E","E","E","E","E"],["E","1","2","E","1"]]
+#board = [["2","E","E","1","E"],["E","2","3","E","E"],["2","E","E","E","2"],["E","2","2","E","E"],["E","2","E","1","E"]]
+board = [["E","E","3","E","3"],["2","E","E","E","E"],["E","2","2","2","E"],["E","E","E","E","E"],["E","1","2","E","1"]]
 for row in board:
     print(row)
 
@@ -89,3 +89,4 @@ else:
         print(row)
 print("Time run: ", time_run)
 print("Memory uses: ", sys.getsizeof(board), " bytes")
+

@@ -51,13 +51,13 @@ def checkPoint(bo):
     return res
 
 def solve1(bo):
+    z = 0
     prob = bo
     pos_list = findEmpty(bo)
     for i in range(0,9):
         
         for j in pos_list[i]:
             bo[i][j]= random.randint(1,9)
-            z = 0
         while checkPoint(bo) != 0:
             if z > 200: break
             for j in pos_list[i]:
@@ -75,6 +75,7 @@ def solve1(bo):
     if z == 201:
         print("Last answer:")
     else: print("The answer: ")
+
 def findNum(col):
     res =[]
     for i in range (1,10):
@@ -246,3 +247,23 @@ for i in range(len(test_case)):
     print(str(time_run))
     print("Mem memorry usage = ",end="")
     print(sys.getsizeof(result))
+
+board = [ 
+    [0,6,7,9,0,8,2,1,0],
+    [0,0,0,0,5,0,0,0,0],
+    [8,5,0,1,0,6,0,3,4],
+    [0,3,8,0,0,0,4,9,0],
+    [1,0,0,0,0,0,0,0,3],
+    [0,4,6,0,0,0,5,2,0],
+    [6,2,0,7,0,3,0,4,9],
+    [0,0,0,0,8,0,0,0,0],
+    [0,8,1,4,0,9,3,5,0]]
+time_start = time.time()
+result = solve1(board)
+time_run = time.time()-time_start
+for row in board:
+    print(row)
+print("Time run = ",end="")
+print(str(time_run))
+print("Mem memorry usage = ",end="")
+print(sys.getsizeof(result))
