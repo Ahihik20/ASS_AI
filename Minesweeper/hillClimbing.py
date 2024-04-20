@@ -3,6 +3,7 @@ import math
 import copy
 import time
 import sys
+import csv
 
 def goalState(board):
     for row in range(len(board)):
@@ -73,20 +74,151 @@ def hillClimbing(board):
         step += 1   
     return []
 
-#board = [["2","E","E","1","E"],["E","2","3","E","E"],["2","E","E","E","2"],["E","2","2","E","E"],["E","2","E","1","E"]]
-board = [["E","E","3","E","3"],["2","E","E","E","E"],["E","2","2","2","E"],["E","E","E","E","E"],["E","1","2","E","1"]]
-for row in board:
-    print(row)
 
-print()
-start_time = time.time()
-board = hillClimbing(board)
-time_run = time.time()-start_time
-if board == []:
-    print("No solution for problem")
-else:
-    for row in board:
+test1 = [["2","E","E","1","E"],
+         ["E","2","3","E","E"],
+         ["2","E","E","E","2"],
+         ["E","2","2","E","E"],
+         ["E","2","E","1","E"]]
+
+test2 = [["E","E","2","E","1"],
+         ["1","E","E","E","E"],
+         ["E","1","3","3","E"],
+         ["2","E","3","E","2"],
+         ["E","3","E","E","E"]]
+
+test3 = [["2","E","2","1","E"],
+         ["E","E","E","E","E"],
+         ["E","E","E","1","E"],
+         ["2","E","1","E","E"],
+         ["E","2","1","2","E"]]
+
+test4 = [["E","1","E","E","2"],
+         ["E","E","2","E","E"],
+         ["E","E","2","E","E"],
+         ["E","2","E","1","1"],
+         ["E","2","E","E","1"]]
+
+test5 = [["1","1","1","1","E"],
+         ["1","E","2","E","E"],
+         ["2","E","E","2","E"],
+         ["E","E","1","E","E"],
+         ["E","1","E","E","1"]] 
+
+test6 = [["E","E","1","E","1"],
+         ["3","E","E","E","E"],
+         ["E","2","2","E","2"],
+         ["2","3","E","E","E"],
+         ["E","2","1","2","E"]]
+
+test7 = [["1","E","E","E","E"],
+         ["E","E","1","E","1"],
+         ["E","E","2","1","E"],
+         ["1","1","E","E","E"],
+         ["1","E","2","1","E"]]
+
+test8 = [["E","1","2","E","E"],
+         ["E","E","2","1","E"],
+         ["1","E","E","E","E"],
+         ["E","2","1","E","E"],
+         ["E","E","1","E","1"]]
+
+test9 = [["E","1","2","E","E"],
+         ["2","E","2","3","3"],
+         ["E","3","E","E","E"],
+         ["E","3","E","3","E"],
+         ["E","2","2","E","E"]]
+
+test10 = [["E","E","1","E","1"],
+         ["E","1","E","1","1"],
+         ["E","1","E","1","E"],
+         ["E","1","E","E","1"],
+         ["1","1","E","E","E"]]
+
+test11 = [["E","2","1","2","E"],
+         ["E","E","E","E","E"],
+         ["1","E","2","E","1"],
+         ["1","E","E","E","1"],
+         ["1","2","E","2","E"]]
+
+test12 = [["1","2","E","E","E"],
+         ["1","E","E","3","E"],
+         ["1","E","E","3","2"],
+         ["E","E","2","E","E"],
+         ["1","E","1","1","E"]]
+ 
+test13 = [["E","1","2","E","1"],
+         ["E","E","E","E","E"],
+         ["E","1","E","1","E"],
+         ["E","E","E","1","E"],
+         ["1","E","E","1","1"]]
+ 
+test14 = [["1","2","E","1","E"],
+         ["1","E","E","E","E"],
+         ["2","E","E","2","E"],
+         ["1","E","2","3","E"],
+         ["E","E","E","2","1"]]
+
+test15 = [["E","1","2","E","1"],
+         ["1","E","2","E","E"],
+         ["E","E","E","E","1"],
+         ["E","E","E","E","E"],
+         ["E","2","3","2","E"]]
+
+test_case = [test1, test2, test3, test4, test5, test6, test7, test8, test9, test10, test11, test12, test13, test14, test15]
+Result = []
+check_solution = False
+for i in range(len(test_case)):
+    print("Testcase {}:".format(i+1))
+    for row in test_case[i]:
         print(row)
-print("Time run: ", time_run)
-print("Memory uses: ", sys.getsizeof(board), " bytes")
+    time_start = time.time()
+    result = hillClimbing(test_case[i])
+    time_run = time.time()-time_start
+    if result == []:
+        check_solution = False
+        print("No solution for problem")
+    else:
+        check_solution = True
+        print("Result:")
+        for row in result:
+            print(row)
+    print("Time run = ",end="")
+    print(time_run)
+    print("Mem memorry usage = ",end="")
+    print(sys.getsizeof(result))
+    temp = {"Test case": i+1, "Time run": time_run, "Memory": sys.getsizeof(result), "Solution": check_solution}
+    Result.append(temp)
+
+# Write information into CSV file
+csv_file = r"Minesweeper\Result_HillClimbing.csv"
+fields = ['Test case', 'Time run', 'Memory', 'Solution']
+with open(csv_file, 'w', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=fields)
+    writer.writeheader()
+    for result in Result:
+        writer.writerow(result)
+
+#TEST
+# board = [["2","E","2","1","E"],
+#          ["E","E","E","E","E"],
+#          ["E","E","E","1","E"],
+#          ["2","E","1","E","E"],
+#          ["E","2","1","2","E"]]
+# print("Testcase:")
+# for row in board:
+#     print(row)
+
+# print()
+# start_time = time.time()
+# board = hillClimbing(board)
+# time_run = time.time()-start_time
+# if board == []:
+#     print("No solution for problem")
+# else:
+#     print("Result:")
+#     for row in board:
+#         print(row)
+# print("Time run: ", time_run)
+# print("Memory uses: ", sys.getsizeof(board), " bytes")
 

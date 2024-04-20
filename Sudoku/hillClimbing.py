@@ -3,6 +3,7 @@ import time
 import itertools
 import random
 import sys
+import csv
 
 def checkValid(board, num , pos):
     # Check column
@@ -73,8 +74,8 @@ def solve1(bo):
             z = z+1
     # print(bo[0])
     if z == 201:
-        print("Last answer:")
-    else: print("The answer: ")
+        return False
+    else: return True
 
 def findNum(col):
     res =[]
@@ -236,34 +237,61 @@ test15 =  [
     [7,0,8,2,0,0,0,3,5]]
 
 test_case = [test1, test2, test3, test4, test5, test6, test7, test8, test9, test10, test11, test12, test13, test14, test15]
+Result = []
 for i in range(len(test_case)):
     print("Testcase {}:".format(i+1))
+    for row in test_case[i]:
+        print(row)
     time_start = time.time()
     result = solve1(test_case[i])
     time_run = time.time()-time_start
-    for row in test_case[i]:
-        print(row)
+    if result:
+        print("Result: ")
+        for row in test_case[i]:
+            print(row)
+    else: print("No solution for problem")
     print("Time run = ",end="")
-    print(str(time_run))
+    print(time_run)
     print("Mem memorry usage = ",end="")
     print(sys.getsizeof(result))
+    temp = {"Test case": i+1, "Time run": time_run, "Memory": sys.getsizeof(result), "Solution": result}
+    Result.append(temp)
 
-board = [ 
-    [0,6,7,9,0,8,2,1,0],
-    [0,0,0,0,5,0,0,0,0],
-    [8,5,0,1,0,6,0,3,4],
-    [0,3,8,0,0,0,4,9,0],
-    [1,0,0,0,0,0,0,0,3],
-    [0,4,6,0,0,0,5,2,0],
-    [6,2,0,7,0,3,0,4,9],
-    [0,0,0,0,8,0,0,0,0],
-    [0,8,1,4,0,9,3,5,0]]
-time_start = time.time()
-result = solve1(board)
-time_run = time.time()-time_start
-for row in board:
-    print(row)
-print("Time run = ",end="")
-print(str(time_run))
-print("Mem memorry usage = ",end="")
-print(sys.getsizeof(result))
+# Write information into CSV file
+csv_file = r"Sudoku\Result_HillClimbing.csv"
+fields = ['Test case', 'Time run', 'Memory','Solution']
+with open(csv_file, 'w', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=fields)
+    writer.writeheader()
+    for result in Result:
+        writer.writerow(result)
+
+
+
+# TEST
+# board = [ 
+#     [3,6,2,0,1,0,8,5,4],
+#     [0,5,0,4,0,8,0,2,0],
+#     [0,0,0,0,0,0,0,0,0],
+#     [6,0,5,9,0,1,2,0,8],
+#     [2,0,0,0,0,0,0,0,6],
+#     [8,0,3,2,0,6,9,0,5],
+#     [0,0,0,0,0,0,0,0,0],
+#     [0,2,0,8,0,4,0,3,0],
+#     [4,3,9,0,2,0,1,8,7]]
+# time_start = time.time()
+# result = solve1(board)
+# time_run = time.time()-time_start
+# print("Testcase:")
+# for row in board:
+#     print(row)
+# print()
+# if result:
+#     print("Result:")
+#     for row in board:
+#         print(row)
+# else: print("No solution for problem")
+# print("Time run = ",end="")
+# print(str(time_run))
+# print("Mem memorry usage = ",end="")
+# print(sys.getsizeof(result))
